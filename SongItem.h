@@ -15,6 +15,7 @@ class SongItem {
 protected:
   std::vector<Listener *> listeners;
   State *currentState;
+  double revenue = 0.0;
 
 public:
   SongItem();
@@ -30,6 +31,11 @@ public:
   State *getState() const;
   void publish();
   virtual void doAdd(SongItem *item) = 0;
+  // Montisation state methods
+  void stream();
+  void upgradeTier();
+  void addRevenue(double amount);
+  double getRevenue() const;
 
   // Composite Methods
   virtual void add(SongItem *item) = 0;
