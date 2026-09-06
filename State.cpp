@@ -1,6 +1,6 @@
 #include "State.h"
 #include "SongItem.h"
-
+#include <iostream>
 void InProductionState::addPart(SongItem *context, SongItem *part) {
   context->doAdd(part);
 }
