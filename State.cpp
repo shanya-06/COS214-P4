@@ -12,3 +12,7 @@ void InProductionState::publish(SongItem *context) {
 void PublishedState::addPart(SongItem *context, SongItem *part) {
   std::cout << "Cannot modify a published song" << std::endl;
 }
+
+void PublishedState::publish(SongItem *context) {
+  std::cout << "Song is already published!" << std::endl;
+}
