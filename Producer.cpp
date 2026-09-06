@@ -1,4 +1,5 @@
 #include "Producer.h"
+#include "SongItem.h"
 
 Producer::Producer() { currentSong = nullptr; }
 
@@ -17,3 +18,5 @@ void Producer::publishSong() {
     currentSong->publish();
   }
 }
+
+SongItem *Producer::getSong() const { return currentSong; }
