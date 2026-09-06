@@ -11,3 +11,9 @@ void Producer::addComponentToSong(SongItem *component) {
     currentSong->add(component);
   }
 }
+
+void Producer::publishSong() {
+  if (currentSong != nullptr) {
+    currentSong->publish();
+  }
+}
