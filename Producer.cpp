@@ -1,0 +1,13 @@
+#include "Producer.h"
+
+Producer::Producer() { currentSong = nullptr; }
+
+Producer::~Producer() { delete currentSong; }
+
+void Producer::startNewSong() { currentSong = new Verse(); }
+
+void Producer::addComponentToSong(SongItem *component) {
+  if (currentSong != nullptr) {
+    currentSong->add(component);
+  }
+}
