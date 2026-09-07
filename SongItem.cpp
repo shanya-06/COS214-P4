@@ -56,10 +56,6 @@ void Verse::play() {
     }
 }
 
-ExportOptions* Verse::createIterator() {
-    //implement iterator when iterator class done
-    return nullptr;
-}
 
 // Lyric 
 Lyric::Lyric(const std::string& text) : text(text) {}
@@ -73,8 +69,4 @@ void Lyric::remove(SongItem* item) {/*leaf can't remove*/}
 
 void Lyric::play() {
     std::cout << "Playing lyric: " << text << "\n";
-}
-
-ExportOptions* Lyric::createIterator() {
-    return nullptr;
 }
