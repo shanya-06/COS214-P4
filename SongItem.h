@@ -7,7 +7,6 @@
 
 // Forward declarations
 class State;
-class ExportOptions;
 
 // Component (Base Class)
 class SongItem {
@@ -35,8 +34,6 @@ public:
   virtual void remove(SongItem *item) = 0;
   virtual void play() = 0;
 
-  // Iterator creation
-  virtual ExportOptions *createIterator() = 0;
 };
 
 // Composite
@@ -56,7 +53,6 @@ public:
   void add(SongItem *item) override;
   void remove(SongItem *item) override;
   void play() override;
-  ExportOptions *createIterator() override;
 };
 
 // Leaf
@@ -72,7 +68,6 @@ public:
   void add(SongItem *item) override;
   void remove(SongItem *item) override;
   void play() override;
-  ExportOptions *createIterator() override;
 };
 
 #endif // SONGITEM_H
