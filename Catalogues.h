@@ -5,6 +5,7 @@
 #define CATALOGUES_H
 
 #include <vector>
+#include <memory>
 
 #include "SongItem.h"
 #include "Iterator.h"
@@ -14,7 +15,7 @@ class Catalog
 {
   public:
     ~Catalog();
-    virtual iterator* createIterator()=0;
+    virtual std::unique_ptr<iterator> createIterator()=0;
     virtual void addSongItem(SongItem* i)=0;
     virtual void removeSongItem(SongItem* i)=0;
     virtual bool isEmpty()=0;
@@ -32,7 +33,7 @@ class publishedTracks: public Catalog
     publishedTracks();
     ~publishedTracks();
 
-    iterator* createIterator();
+    std::unique_ptr<iterator> createIterator();
     void addSongItem(SongItem* i);
     void removeSongItem(SongItem* i);
     bool isEmpty();
@@ -47,7 +48,7 @@ class fullTracks: public Catalog
     fullTracks();
     ~fullTracks();
 
-    iterator* createIterator();
+    std::unique_ptr<iterator> createIterator();
     void addSongItem(SongItem* i);
     void removeSongItem(SongItem* i);
     bool isEmpty();

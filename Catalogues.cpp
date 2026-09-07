@@ -7,7 +7,10 @@ publishedTracks::~publishedTracks(){
   list.clear();
 }
 
-iterator* publishedTracks::createIterator(){ return new fullTrackListIterator(&list); } // storage not ownership, delegates ownership to fullTrackListIterator
+std::unique_ptr<iterator> publishedTracks::createIterator(){ 
+  return std::unique_ptr<fullTrackListIterator>(
+    new fullTrackListIterator(&list)); 
+} // storage not ownership, delegates ownership to fullTrackListIterator
 
 void publishedTracks::addSongItem(SongItem* i){ list.push_back(i); }
 
@@ -26,7 +29,11 @@ fullTracks::~fullTracks(){
   for(int i = 0; i < list.size(); i++) delete list[i]; // full ownership of all tracks, responsible for deleting
   list.clear();
 }
-iterator* fullTracks::createIterator(){ return new fullTrackListIterator(&list); }
+
+std::unique_ptr<iterator> fullTracks::createIterator(){ 
+  return std::unique_ptr<fullTrackListIterator>(
+    new fullTrackListIterator(&list)); 
+}
 
 void fullTracks::addSongItem(SongItem* i){ list.push_back(i);} 
 

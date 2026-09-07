@@ -37,6 +37,7 @@ public:
 
   // Iterator creation
   virtual ExportOptions *createIterator() = 0;
+  virtual std::string getLyric();
 };
 
 // Composite
@@ -73,6 +74,8 @@ public:
   void remove(SongItem *item) override;
   void play() override;
   ExportOptions *createIterator() override;
+
+  std::string getLyric();
 };
 
 #endif // SONGITEM_H

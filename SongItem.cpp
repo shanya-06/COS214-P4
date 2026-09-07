@@ -2,6 +2,8 @@
 
 SongItem::SongItem() { currentState = new InProductionState(); }
 
+std::string SongItem::getLyric(){ }
+
 void SongItem::setState(State *state) {
   if (currentState != nullptr) {
     delete currentState;
@@ -27,3 +29,5 @@ void SongItem::upgradeTier() { currentState->upgradeTier(this); }
 void SongItem::addRevenue(double amount) { revenue += amount; }
 
 double SongItem::getRevenue() const { return revenue; }
+
+std::string Lyric::getLyric(){ return text; }
