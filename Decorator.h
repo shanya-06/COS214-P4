@@ -14,13 +14,13 @@ class specialEffects : public SongItem
 
     SongItem* addSpecialEffect(SongItem* i) override;
     virtual void playSong() override;
-    
+
 //delegation allows decorated song items behave equally
     void doAdd(SongItem* item) override;
     void add(SongItem* item) override;
     void remove(SongItem* item) override;
     void play() override;
-    ExportOptions* createIterator() override;
+    //ExportOptions* createIterator() override;
     std::string getLyric() override;
 };
 

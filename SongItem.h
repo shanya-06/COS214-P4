@@ -38,7 +38,7 @@ public:
   virtual void play() = 0;
 
   // Iterator creation
-  virtual ExportOptions *createIterator() = 0;
+  //virtual ExportOptions *createIterator() = 0;
   virtual std::string getLyric();
 
   // Decorator Methods
@@ -66,7 +66,7 @@ public:
   void remove(SongItem *item) override;
   void play() override;
 
-  ExportOptions *createIterator() override;
+  //ExportOptions *createIterator() override;
   std::string getLyric() override;
 
   SongItem* addSpecialEffect(SongItem* i) override;
@@ -88,7 +88,7 @@ public:
   void remove(SongItem *item) override;
   void play() override;
 
-  ExportOptions *createIterator() override;
+  //ExportOptions *createIterator() override;
   std::string getLyric() override;
 
   SongItem* addSpecialEffect(SongItem* i) override;

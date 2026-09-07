@@ -1,6 +1,8 @@
 #include "Catalogues.h"
 #include <algorithm>
 
+Catalog::~Catalog(){}
+
 publishedTracks::publishedTracks(){}
 
 publishedTracks::~publishedTracks(){
@@ -26,7 +28,7 @@ bool publishedTracks::isEmpty(){ return list.empty(); }
 fullTracks::fullTracks(){}
 
 fullTracks::~fullTracks(){
-  for(int i = 0; i < list.size(); i++) delete list[i]; // full ownership of all tracks, responsible for deleting
+  for(size_t i = 0; i < list.size(); i++) delete list[i]; // full ownership of all tracks, responsible for deleting
   list.clear();
 }
 

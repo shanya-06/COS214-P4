@@ -1,5 +1,7 @@
 #include "Iterator.h"
 
+iterator::~iterator(){}
+
 publishedOnlyIterator::publishedOnlyIterator(std::vector<SongItem*>* list) : currentPos(0), itList(list) {  }
 
 publishedOnlyIterator::~publishedOnlyIterator(){ }
@@ -8,7 +10,7 @@ void publishedOnlyIterator::first(){ currentPos = 0; }
 
 void publishedOnlyIterator::next(){ currentPos++; }
 
-bool publishedOnlyIterator::hasNext(){ return currentPos < itList->size(); }
+bool publishedOnlyIterator::hasNext(){ return currentPos < static_cast<int>(itList->size()); }
 
 SongItem* publishedOnlyIterator::current(){ return (*itList)[currentPos]; }
 

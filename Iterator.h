@@ -20,10 +20,11 @@ class iterator
 class publishedOnlyIterator: public iterator
 {
   protected:
-    int currentPos;
+    size_t currentPos;
     std::vector<SongItem*>* itList; // ptr to vector for live iteration & updates
-    publishedOnlyIterator(std::vector<SongItem*>* list);
+    
   public:
+    publishedOnlyIterator(std::vector<SongItem*>* list);
     ~publishedOnlyIterator();
 
     void first();
@@ -37,8 +38,8 @@ class fullTrackListIterator: public iterator
   protected:
     int currentPos;
     std::vector<SongItem*>* itList;
-    fullTrackListIterator(std::vector<SongItem*>* list);
   public:
+    fullTrackListIterator(std::vector<SongItem*>* list);
     ~fullTrackListIterator();
 
     void first();

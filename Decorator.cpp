@@ -29,9 +29,9 @@ void specialEffects::play(){
   if (baseSong) baseSong->play();
 }
 
-ExportOptions* specialEffects::createIterator(){
-  return baseSong ? baseSong->createIterator() : nullptr;
-}
+// ExportOptions* specialEffects::createIterator(){
+//   return baseSong ? baseSong->createIterator() : nullptr;
+// }
 
 std::string specialEffects::getLyric(){
   return baseSong ? baseSong->getLyric() : "";

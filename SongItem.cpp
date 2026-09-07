@@ -14,6 +14,10 @@ void SongItem::setState(State *state) {
 
 State* SongItem::getState() const { return currentState; }
 
+std::string SongItem::getLyric(){
+  return "";   // base default
+}
+
 void SongItem::publish() { currentState->publish(this); }
 
 void SongItem::stream() { currentState->stream(this); }
@@ -80,3 +84,5 @@ SongItem* Lyric::addSpecialEffect(SongItem* i){ return this; }
 std::string Lyric::getLyric(){ return text; }
 
 void Lyric::playSong(){ play(); }
+
+
