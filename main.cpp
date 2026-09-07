@@ -151,11 +151,48 @@ void Scenario1() { // state's main
   delete badEdit;       // Deletes the edit that was rejected and never attached
 }
 
+// function used to get full coverage
+void testCoverageStats() {
+  // Decorator & Lyric missing edges
+  SongItem *leaf = new Lyric("Test Leaf");
+  SongItem *deco = new autotune(leaf);
+
+  deco->doAdd(nullptr);
+  deco->add(nullptr);
+  deco->remove(nullptr);
+  deco->play();
+  deco->getLyric();
+  deco->addSpecialEffect(leaf);
+
+  leaf->doAdd(nullptr);
+  leaf->add(nullptr);
+  leaf->remove(nullptr);
+  leaf->addSpecialEffect(nullptr);
+
+  delete deco;
+
+  // State missing edges
+  SongItem *dummy = new Verse();
+  dummy->publish(); // Transitions to PublishedState
+  dummy->publish(); // Hits PublishedState::publish
+
+  dummy->upgradeTier(); // Hits PublishedState::upgradeTier (Transitions to
+                        // FreeTier)
+  dummy->publish();     // Hits FreeTierState::publish
+  dummy->add(nullptr);  // Hits FreeTierState::addPart
+
+  dummy->upgradeTier(); // Transitions to PremiumState
+  dummy->publish();     // Hits PremiumState::publish
+  dummy->add(nullptr);  // Hits PremiumState::addPart
+  dummy->upgradeTier(); // Hits PremiumState::upgradeTier
+
+  delete dummy;
+}
+
 int main() {
   testIterator();
+  testDecorator();
+  Scenario1();
 
-  // testDecorator();
-
-  // state's main
-  //  Scenario1();
+  return 0;
 }
