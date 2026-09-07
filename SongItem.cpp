@@ -1,72 +1,88 @@
 #include "SongItem.h"
-#include "State.h"
-#include <iostream>
 
-// SongItem 
-SongItem::SongItem() : currentState(new InProductionState()), revenue(0.0) {}
-SongItem::~SongItem() { delete currentState; }
+SongItem::SongItem() { currentState = new InProductionState(); }
 
-void SongItem::setState(State* state) {
-    if (currentState != nullptr) {
-        delete currentState;
-    }
-    currentState = state;
+SongItem::~SongItem(){ }
+
+void SongItem::setState(State *state) {
+  if (currentState != nullptr) {
+    delete currentState;
+  }
+
+  currentState = state;
 }
 
 State* SongItem::getState() const { return currentState; }
 
+std::string SongItem::getLyric(){
+  return "";   // base default
+}
+
 void SongItem::publish() { currentState->publish(this); }
+
 void SongItem::stream() { currentState->stream(this); }
+
 void SongItem::upgradeTier() { currentState->upgradeTier(this); }
 
 void SongItem::addRevenue(double amount) { revenue += amount; }
+
 double SongItem::getRevenue() const { return revenue; }
 
-// Verse 
-Verse::Verse() {}
-Verse::~Verse() {
-    for (auto* part : parts) {
-        delete part;
-    }
-    parts.clear();
+// verse
+
+Verse::Verse(){}
+
+Verse::~Verse(){
+  for(SongItem* part: parts) delete part;
+  parts.clear();
 }
 
-void Verse::doAdd(SongItem* item) {
-    parts.push_back(item);
+void Verse::doAdd(SongItem *item) { parts.push_back(item); }
+
+void Verse::add(SongItem *item) { currentState->addPart(this, item); }
+
+void Verse::remove(SongItem* item){
+  auto it = std::find(parts.begin(), parts.end(), item);
+  if (it != parts.end()){
+    delete *it;
+    parts.erase(it);
+  }
 }
 
-void Verse::add(SongItem* item) {
-    currentState->addPart(this, item);
+void Verse::play(){
+  for(SongItem* part: parts) part->play();  //recruse into children
 }
 
-void Verse::remove(SongItem* item) {
-    for (auto it = parts.begin(); it != parts.end(); ++it) {
-        if (*it == item) {
-            delete *it;
-            parts.erase(it);
-            break;
-        }
-    }
+std::string Verse::getLyric(){
+  std::string result;
+  for (SongItem* part : parts){
+    result += part->getLyric() + " ";
+  }
+  return result;
 }
 
-void Verse::play() {
-    std::cout << "Playing verse with " << parts.size() << " parts.\n";
-    for (auto* part : parts) {
-        part>play();
-    }
-}
+SongItem* Verse::addSpecialEffect(SongItem* i){ return this; }
+
+void Verse::playSong(){ play(); } // delegates to the existing method
+
+// lyric
+
+Lyric::Lyric(const std::string &t): text(t){}
+
+Lyric::~Lyric(){}
+
+void Lyric::doAdd(SongItem *item) { return; }
+
+void Lyric::add(SongItem *item) { return; }
+
+void Lyric::remove(SongItem *item){ return; }
+
+void Lyric::play(){ std::cout << "..." << text << "...\n"; }
+
+SongItem* Lyric::addSpecialEffect(SongItem* i){ return this; }
+
+std::string Lyric::getLyric(){ return text; }
+
+void Lyric::playSong(){ play(); }
 
 
-// Lyric 
-Lyric::Lyric(const std::string& text) : text(text) {}
-Lyric::~Lyric() {}
-
-void Lyric::doAdd(SongItem* item) {}
-
-void Lyric::add(SongItem* item) {}
-
-void Lyric::remove(SongItem* item) {/*leaf can't remove*/}
-
-void Lyric::play() {
-    std::cout << "Playing lyric: " << text << "\n";
-}
