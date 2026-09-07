@@ -1,7 +1,6 @@
 #ifndef SONGITEM_H
 #define SONGITEM_H
 
-#include "Listeners.h"
 #include "State.h"
 #include <string>
 #include <vector>
@@ -13,18 +12,12 @@ class ExportOptions;
 // Component (Base Class)
 class SongItem {
 protected:
-  std::vector<Listener *> listeners;
   State *currentState;
   double revenue = 0.0;
 
 public:
   SongItem();
   virtual ~SongItem(); // Virtual destructor required for polymorphism
-
-  // Observer methods (Subject)
-  virtual void attach(Listener *listener);
-  virtual void detach(Listener *listener);
-  virtual void notifyListeners();
 
   // State methods
   virtual void setState(State *state);
