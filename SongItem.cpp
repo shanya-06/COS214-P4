@@ -15,9 +15,9 @@ void SongItem::setState(State* state) {
 
 State* SongItem::getState() const { return currentState; }
 
-void SongItem::publish() { currentState>publish(this); }
-void SongItem::stream() { currentState>stream(this); }
-void SongItem::upgradeTier() { currentState>upgradeTier(this); }
+void SongItem::publish() { currentState->publish(this); }
+void SongItem::stream() { currentState->stream(this); }
+void SongItem::upgradeTier() { currentState->upgradeTier(this); }
 
 void SongItem::addRevenue(double amount) { revenue += amount; }
 double SongItem::getRevenue() const { return revenue; }
@@ -36,7 +36,7 @@ void Verse::doAdd(SongItem* item) {
 }
 
 void Verse::add(SongItem* item) {
-    currentState>addPart(this, item);
+    currentState->addPart(this, item);
 }
 
 void Verse::remove(SongItem* item) {
