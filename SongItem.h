@@ -4,6 +4,8 @@
 #include "State.h"
 #include <string>
 #include <vector>
+#include <iostream>
+#include <algorithm>
 
 // Forward declarations
 class State;
@@ -21,7 +23,7 @@ public:
 
   // State methods
   virtual void setState(State *state);
-  State *getState() const;
+  //State *getState() const;
   void publish();
   virtual void doAdd(SongItem *item) = 0;
   // Montisation state methods
@@ -38,6 +40,11 @@ public:
   // Iterator creation
   virtual ExportOptions *createIterator() = 0;
   virtual std::string getLyric();
+
+  // Decorator Methods
+  virtual SongItem* addSpecialEffect(SongItem* i) =0;
+  virtual void playSong() =0;
+  virtual State* getState() const;
 };
 
 // Composite
@@ -50,14 +57,20 @@ public:
   virtual ~Verse(); // Must explicitly delete all parts in implementation
 
   // adds to composite tree (called by state)
-  void doAdd(SongItem *item) override;
 
   // delegates adding to State pattern (Can only add onto tree if in Published
   // State)
+  void doAdd(SongItem *item) override;
+
   void add(SongItem *item) override;
   void remove(SongItem *item) override;
   void play() override;
+
   ExportOptions *createIterator() override;
+  std::string getLyric() override;
+
+  SongItem* addSpecialEffect(SongItem* i) override;
+  void playSong() override;
 };
 
 // Leaf
@@ -70,12 +83,16 @@ public:
   virtual ~Lyric();
 
   void doAdd(SongItem *item) override;
+
   void add(SongItem *item) override;
   void remove(SongItem *item) override;
   void play() override;
-  ExportOptions *createIterator() override;
 
-  std::string getLyric();
+  ExportOptions *createIterator() override;
+  std::string getLyric() override;
+
+  SongItem* addSpecialEffect(SongItem* i) override;
+  void playSong() override;
 };
 
 #endif // SONGITEM_H

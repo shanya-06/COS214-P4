@@ -14,7 +14,7 @@
 class Catalog
 {
   public:
-    ~Catalog();
+    virtual ~Catalog();
     virtual std::unique_ptr<iterator> createIterator()=0;
     virtual void addSongItem(SongItem* i)=0;
     virtual void removeSongItem(SongItem* i)=0;

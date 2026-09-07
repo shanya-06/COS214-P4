@@ -1,6 +1,7 @@
 #include "Catalogues.h"
 #include "Iterator.h"
 #include "SongItem.h"
+#include "Decorator.h"
 
 #include <iostream>
 
@@ -66,6 +67,15 @@ void testIterator(){
 
 }
 
+void testDecorator(){
+  SongItem* base = new Lyric("Something Good");
+  SongItem* baseDeco = new fadeout(new autotune(base));
+
+  baseDeco->playSong();
+
+  delete baseDeco;
+
+}
 int main(){
   testIterator();
 }
