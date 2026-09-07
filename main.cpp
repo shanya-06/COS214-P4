@@ -131,11 +131,12 @@ void Scenario1() { // state's main
   std::cout << "\n-> Current Artist Revenue from free streams: $"
             << thrillerVerse->getRevenue() << "\n";
 
-  std::cout << "\n-> A superfan gets tired of the ads and upgrades to Premium "
-               "to support Michael.\n";
+  std::cout << "\n-> Michael's fans get tired of the ads and he upgrades his "
+               "song to Premium "
+               "\n";
   thrillerVerse->upgradeTier();
 
-  std::cout << "\n-> The superfan streams the song repeatedly on Premium.\n";
+  std::cout << "\n-> The superfans stream the song repeatedly on Premium.\n";
   thrillerVerse->stream();
   thrillerVerse->stream();
   thrillerVerse->stream();
