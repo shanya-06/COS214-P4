@@ -194,6 +194,7 @@ int main() {
   testIterator();
   testDecorator();
   Scenario1();
+  testCoverageStats();
 
   return 0;
 }
